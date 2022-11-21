@@ -2,11 +2,8 @@
 import { AiOutlineDelete } from 'react-icons/ai';
 import { ContactBook, ContactItem, ButtonDels } from './ContactList.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  getContact,
-  getFilter,
-  deleteContact,
-} from '../../Redux/contactsSlice';
+import { deleteContact } from '../../Redux/contactsSlice';
+import { getContact, getFilter } from '../../Redux/selectors.js';
 
 export function ContactList() {
   const dispatch = useDispatch();

@@ -7,7 +7,8 @@ import { IconContext } from 'react-icons';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getContact, updateContacts } from '../../Redux/contactsSlice.js';
+import { updateContacts } from '../../Redux/contactsSlice.js';
+import { getContact } from '../../Redux/selectors'
 
 import {
   Form,
