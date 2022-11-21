@@ -1,24 +1,33 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { ContactBook, ContactItem, ButtonDels } from './ContactList.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  getContact,
+  getFilter,
+  deleteContact,
+} from '../../Redux/contactsSlice';
 
-export function ContactList({ contacts, filter, deleteContact }) {
+export function ContactList() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContact);
+  const filter = useSelector(getFilter);
+
   return (
     <ContactBook>
       {contacts
         .filter(contact =>
           contact.name.toLowerCase().includes(filter.toLowerCase())
         )
-        .map(contact => {
+        .map(({ id, name, number }) => {
           return (
-            <ContactItem key={contact.id}>
+            <ContactItem key={id}>
               <p>
-                {contact.name}: {contact.number}
-            
+                {name}: {number}
               </p>
               <ButtonDels
                 type="button"
-                onClick={() => deleteContact(contact.id)}
+                onClick={() => dispatch(deleteContact(id))}
               >
                 <AiOutlineDelete />
               </ButtonDels>
@@ -29,14 +38,14 @@ export function ContactList({ contacts, filter, deleteContact }) {
   );
 }
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  filter: PropTypes.string,
-  deleteContact: PropTypes.func,
-};
+// ContactList.propTypes = {
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       name: PropTypes.string.isRequired,
+//       id: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ).isRequired,
+//   filter: PropTypes.string,
+//   deleteContact: PropTypes.func,
+// };

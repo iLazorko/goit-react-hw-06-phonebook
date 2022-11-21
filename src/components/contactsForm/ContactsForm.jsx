@@ -5,6 +5,10 @@ import { BiUser } from 'react-icons/bi';
 import { BsTelephone } from 'react-icons/bs';
 import { IconContext } from 'react-icons';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getContact, updateContacts } from '../../Redux/contactsSlice.js';
+
 import {
   Form,
   InputContact,
@@ -12,9 +16,26 @@ import {
   ButtonSubmit,
 } from '../contactsForm/ContactsForm.styled';
 
-export function ContactsForm({ contactsCatalog }) {
+export function ContactsForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContact);
+
+  const contactsCatalog = newContact => {
+    if (
+      contacts.some(
+        contactPerson =>
+          contactPerson.name.toLowerCase() === newContact.name.toLowerCase()
+      )
+    ) {
+      alert(`${newContact.name} is already in contacts!`);
+      return;
+    }
+
+    dispatch(updateContacts(newContact));
+  };
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -30,14 +51,14 @@ export function ContactsForm({ contactsCatalog }) {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const newContacts = {
+
+    const newContact = {
       name,
       number,
       id: nanoid(7),
     };
 
-    contactsCatalog(newContacts);
-
+    contactsCatalog(newContact);
     reset();
   };
 
@@ -83,6 +104,6 @@ export function ContactsForm({ contactsCatalog }) {
   );
 }
 
-ContactsForm.propTypes = {
-  contactsCatalog: PropTypes.func.isRequired,
-};
+// ContactsForm.propTypes = {
+//   contactsCatalog: PropTypes.func.isRequired,
+// };
