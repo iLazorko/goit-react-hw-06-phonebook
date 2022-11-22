@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { ContactBook, ContactItem, ButtonDels } from './ContactList.styled';
 import { useSelector, useDispatch } from 'react-redux';
@@ -35,14 +34,3 @@ export function ContactList() {
   );
 }
 
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       id: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-//   filter: PropTypes.string,
-//   deleteContact: PropTypes.func,
-// };

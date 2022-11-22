@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { BiUser } from 'react-icons/bi';
 import { BsTelephone } from 'react-icons/bs';
@@ -104,7 +103,3 @@ export function ContactsForm() {
     </Form>
   );
 }
-
-// ContactsForm.propTypes = {
-//   contactsCatalog: PropTypes.func.isRequired,
-// };
